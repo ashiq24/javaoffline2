@@ -15,22 +15,8 @@ class product
         array=new int[20];
         pos=-1;
     }
-
-    synchronized public void total(Object ob)
+    synchronized public void produce(producer p)
     {
-        consumer c=new consumer();
-        if(ob.getClass()==c.getClass())
-        {
-            get((consumer)ob);
-        }
-        else
-        {
-            produce((producer)ob);
-
-        }
-    }
-     public void produce(producer p)
-        {
             while(pos==array.length-1)
             {
                 try {
@@ -52,8 +38,8 @@ class product
 
             notifyAll();
 
-        }
-    public void get(consumer c)
+    }
+    synchronized public void get(consumer c)
     {
         while(pos==-1 )
         {
@@ -94,7 +80,7 @@ class producer implements Runnable
     public void run() {
         while(true)
         {
-            p.total(this);
+            p.produce(this);
         }
     }
 }
@@ -118,24 +104,23 @@ class consumer implements  Runnable
     public void run() {
         while(true)
         {
-            p.total(this);
+            p.get(this);
         }
     }
 }
 public class Threadoff {
     public static void main(String[] args) {
         product p=new product();
-        new producer("shorno2",p);
-        new producer("shorno3",p);
-        new consumer("ashiq",p);
-        new producer("shorno",p);
-        new producer("sadia",p);
-        new producer("mahfuj",p);
-        new consumer("ashiq1",p);
-        new consumer("ashiq2",p);
-        new consumer("ashiq3",p);
-        new consumer("ashiq4",p);
-        new consumer("ashiq5",p);
+        new producer("producer1",p);
+        new consumer("consumer1",p);
+        new producer("producer2",p);
+        new consumer("consumer2",p);
+        new producer("producer3",p);
+        new consumer("consumer3",p);
+        new producer("producer4",p);
+        new consumer("consumer4",p);
+
+
 
 
     }
