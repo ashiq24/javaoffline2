@@ -40,7 +40,7 @@ public class servermain extends Application {
                 {
                     InetAddress ip=InetAddress.getLocalHost();
                     System.out.println(ip);
-                    server= new ServerSocket(6000);
+                    server= new ServerSocket(8000);
                     System.out.println(server.getLocalPort());
                     new acceptor(smain,server);
 

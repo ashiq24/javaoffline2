@@ -31,14 +31,17 @@ public class acceptor implements Runnable {
             try {
                 System.out.println(a+"connected");
                 Socket s= server.accept();
+                a++;
+                System.out.println(s.getRemoteSocketAddress());
+
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-                        String s="client"+a.toString()+" is connected";
+                        String s="client"+(a)+" is connected";
                         serverm.gettext(s);
                     }
                 });
-                new receive(s,serverm,a++);
+                new receive(s,serverm,a);
             } catch (IOException e) {
                 e.printStackTrace();
             }

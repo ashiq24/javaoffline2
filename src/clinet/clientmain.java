@@ -17,6 +17,7 @@ import java.net.UnknownHostException;
 
 /**
  * Created by Ashiq on 5/21/2016.
+ *
  */
 public class clientmain extends Application {
     clientmain clientm;
@@ -46,7 +47,7 @@ public class clientmain extends Application {
             try {
                 InetAddress ip=InetAddress.getLocalHost();
                 System.out.println(ip.toString());
-                socket=new Socket("127.0.0.1",6000);
+                socket=new Socket("192.168.0.104",8000);
                 writer=new Writemsz(socket);
                 new getmsz(socket,clientm);
             } catch (UnknownHostException e) {
